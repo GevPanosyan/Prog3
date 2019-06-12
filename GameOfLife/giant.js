@@ -1,4 +1,7 @@
-class Giant extends LivingCreature{
+var LivingCreature = require("./LivingCreature");
+var random = require("./random");
+
+module.exports = class Giant extends LivingCreature{
     constructor(x, y) {
         super(x,y);
         this.energy = 10;

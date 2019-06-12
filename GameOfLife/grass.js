@@ -1,4 +1,7 @@
-class Grass  extends LivingCreature{
+var LivingCreature = require("./LivingCreature");
+var random = require("./random");
+
+module.exports = class Grass  extends LivingCreature{
     //շրջապատի հետազոտության մատրիցը
     newDirections() {
         this.directions = [

@@ -1,4 +1,7 @@
-class BlackHole extends LivingCreature {
+var LivingCreature = require("./LivingCreature");
+var random = require("./random");
+
+module.exports = class BlackHole extends LivingCreature {
     constructor(x, y) {
         super(x, y);
         this.energy = 2;
