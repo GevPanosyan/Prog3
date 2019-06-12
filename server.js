@@ -56,7 +56,7 @@ function matrixGenerator(matrixSize, grassArr, eatArr, preArr, holeArr, giantArr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 1, 1);
+matrixGenerator(15,50,40,30,10,15);
 //! Creating MATRIX -- END
 
 
@@ -130,7 +130,7 @@ function game() {
     //! Object to send
     let sendData = {
         matrix: matrix,
-        grassCounter: grassHashiv
+        grassCounter: grassHashiv,
     }
 
     //! Send data over the socket to clients who listens "data"
