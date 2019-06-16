@@ -56,7 +56,7 @@ function matrixGenerator(matrixSize, grassArr, eatArr, preArr, holeArr, giantArr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(15,50,40,30,10,15);
+matrixGenerator(15, 40, 70, 50, 30, 35);
 //! Creating MATRIX -- END
 
 
@@ -80,12 +80,12 @@ function creatingObjects() {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
-                eatArr .push(grassEater);
+                eatArr.push(grassEater);
             } else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
                 grassHashiv++;
-            } else if(matrix[y][x] == 3){
+            } else if (matrix[y][x] == 3) {
                 var predator = new Predator(x, y);
                 preArr.push(predator);
             } else if (matrix[y][x] == 4) {
@@ -107,12 +107,12 @@ function game() {
         }
     }
     if (eatArr[0] !== undefined) {
-        for (var i in eatArr ) {
+        for (var i in eatArr) {
             eatArr[i].eat();
         }
     }
     if (preArr[0] !== undefined) {
-        for (var i in preArr ) {
+        for (var i in preArr) {
             preArr[i].eat();
         }
     }
@@ -137,4 +137,4 @@ function game() {
     io.sockets.emit("data", sendData);
 }
 
-setInterval(game, 1000);
+setInterval(game, 200);
