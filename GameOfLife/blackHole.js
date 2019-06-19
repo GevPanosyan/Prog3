@@ -93,6 +93,7 @@ module.exports = class BlackHole extends LivingCreature {
             //և տեղադրում է այն սև անցքերի զանգվածի մեջ
             var newHole = new BlackHole(x, y);
             holeArr.push(newHole);
+            blackHoleHashiv++;
 
             //հիմնական matrix-ում կատարում է գրառում նոր սև անցքի մասին
             matrix[y][x] = 4;

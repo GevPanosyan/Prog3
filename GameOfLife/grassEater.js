@@ -65,7 +65,7 @@ module.exports = class Eatgrass extends LivingCreature{
 
             //բազմացման գործակիցը մեծացնում է
             this.multiply++;
-
+            grassEaterHashiv++;
             //մեծացնում է էներգիան
             this.energy++;
 
@@ -111,6 +111,7 @@ module.exports = class Eatgrass extends LivingCreature{
             //և տեղադրում է այն խոտակերների զանգվածի մեջ
             var newGrasseater = new Eatgrass(x, y);
             eatArr.push(newGrasseater);
+            grassEaterHashiv++;
 
             //հիմնական matrix-ում կատարում է գրառում նոր խոտի մասին
             matrix[y][x] = 1;

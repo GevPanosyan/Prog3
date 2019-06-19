@@ -17,6 +17,10 @@ holeArr = [];// սև անցքեր
 giantArr = [];//հսկաների զանգված
 matrix = [];
 grassHashiv = 0;
+grassEaterHashiv = 0;
+predatorHashiv = 0;
+blackHoleHashiv = 0;
+giantHashiv = 0;
 //! Setting global arrays  -- END
 
 
@@ -56,7 +60,7 @@ function matrixGenerator(matrixSize, grassArr, eatArr, preArr, holeArr, giantArr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(15, 40, 70, 50, 30, 35);
+matrixGenerator(20, 12, 50, 40, 7, 10);
 //! Creating MATRIX -- END
 
 
@@ -81,6 +85,7 @@ function creatingObjects() {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
                 eatArr.push(grassEater);
+                grassEaterHashiv++;
             } else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
@@ -88,12 +93,15 @@ function creatingObjects() {
             } else if (matrix[y][x] == 3) {
                 var predator = new Predator(x, y);
                 preArr.push(predator);
+                predatorHashiv++;
             } else if (matrix[y][x] == 4) {
                 var blackhole = new BlackHole(x, y);
                 holeArr.push(blackhole);
+                blackHoleHashiv++;
             } else if (matrix[y][x] == 5) {
                 var giant = new Giant(x, y);
                 giantArr.push(giant);
+                giantHashiv++;
             }
         }
     }
@@ -131,10 +139,15 @@ function game() {
     let sendData = {
         matrix: matrix,
         grassCounter: grassHashiv,
+        grassEaterCounter: grassEaterHashiv,
+        predatorCounter: predatorHashiv,
+        blackHoleCounter: blackHoleHashiv,  
+        giantCounter: giantHashiv,
     }
 
     //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
+    console.log(sendData);
 }
 
-setInterval(game, 200);
+setInterval(game, 300);

@@ -31,7 +31,8 @@ module.exports = class Grass  extends LivingCreature{
                 //Ավելացնում է նոր խոտ խոտերի զանգվածում
                 var newgrass = new Grass(x, y);
                 grassArr.push(newgrass);
-
+                grassHashiv++;
+                
                 //Ավելացնում է նոր խոտի մասին գրառում հիմնական matrix-ում 
                 matrix[y][x] = 1;
                 this.multiply = 0;

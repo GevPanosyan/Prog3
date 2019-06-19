@@ -132,6 +132,7 @@ module.exports = class Giant extends LivingCreature{
             //և տեղադրում է այն հսկաների զանգվածի մեջ
             var newGiant = new Giant(x, y);
             giantArr.push(newGiant);
+            giantHashiv++;
 
             //հիմնական matrix-ում կատարում է գրառում նոր հսկայի մասին
             matrix[y][x] = 5;
