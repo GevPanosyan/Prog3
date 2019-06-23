@@ -13,12 +13,25 @@ function setup() {
     let predatorCountElement = document.getElementById('preCount');
     let blackHoleCountElement = document.getElementById('holeCount');
     let giantCountElement = document.getElementById('giantCount');
+    let weatherType = document.getElementById('weather');
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
-    socket.on("data",console.log(data));
     socket.on("data", drawCreatures);
 
     function drawCreatures(data) {
+        /*
+        if(data.exanak == "Spring"){
+            document.body.style.backgroundColor = "green";
+        }else if(data.exanak == "Summer"){
+            document.body.style.backgroundColor = "yellow";
+        }else if(data.exanak == "Winter"){
+            document.body.style.backgroundColor = "#ecf0f1";
+        }else if(data.exanak == "Autumn"){
+            document.body.style.backgroundColor = "red";
+        }*/
+
+        weatherType.innerText = "Եղանակ: " + data.exanak;
+        console.log(data.exanak)
         //! after getting data pass it to matrix variable
         matrix = data.matrix;
         grassCountElement.innerText = data.grassCounter;

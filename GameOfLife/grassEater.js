@@ -78,7 +78,7 @@ module.exports = class Eatgrass extends LivingCreature{
             }
 
             //եթե պատրաստ է բազմացմանը, բազմանում է 
-            if (this.multiply == 7) {
+            if (this.multiply == 4) {
                 this.mul()
                 this.multiply = 0;
             }
@@ -122,7 +122,11 @@ module.exports = class Eatgrass extends LivingCreature{
     //die() մահանալ
     die() {
         //Հիմնական մատրիցում իր դիրքում դնում է դատարկություն
-        matrix[this.y][this.x] = 0;
+        if(weather == "Winter"){
+            matrix[this.y][this.x] = 4;
+        }else{
+            matrix[this.y][this.x] = 0;
+        }
 
         //!!! ԿԱՐԵՎՈՐ !!! ջնջում է ինքն իրեն խոտակերների զանգվածից
         for (var i in eatArr) {

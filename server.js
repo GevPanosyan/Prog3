@@ -21,6 +21,7 @@ grassEaterHashiv = 0;
 predatorHashiv = 0;
 blackHoleHashiv = 0;
 giantHashiv = 0;
+weather = null;
 //! Setting global arrays  -- END
 
 
@@ -76,7 +77,6 @@ app.get('/', function (req, res) {
 });
 server.listen(3000);
 //! SERVER STUFF END  --  END
-
 
 
 function creatingObjects() {
@@ -135,19 +135,35 @@ function game() {
         }
     }
 
-    //! Object to send
-    let sendData = {
-        matrix: matrix,
-        grassCounter: grassHashiv,
-        grassEaterCounter: grassEaterHashiv,
-        predatorCounter: predatorHashiv,
-        blackHoleCounter: blackHoleHashiv,  
-        giantCounter: giantHashiv,
+    
+   i = 1;
+   i++;
+    if (i == 1) {
+        weather = "Summer";
     }
+    else if (i == 2) {
+        weather = "Autumn";
+    }
+    else if (i == 3) {
+        weather = "Winter";
+    }
+    else if (i == 4) {
+        weather = "Spring";
+    }
+        //! Object to send
+        let sendData = {
+            matrix: matrix,
+            grassCounter: grassHashiv,
+            grassEaterCounter: grassEaterHashiv,
+            predatorCounter: predatorHashiv,
+            blackHoleCounter: blackHoleHashiv,
+            giantCounter: giantHashiv,
+            exanak: weather,
+        }
 
-    //! Send data over the socket to clients who listens "data"
-    io.sockets.emit("data", sendData);
-    console.log(sendData);
+        //! Send data over the socket to clients who listens "data"
+        io.sockets.emit("data", sendData);
+        console.log(weather);
+    
 }
-
-setInterval(game, 300);
+setInterval(game, 1000);

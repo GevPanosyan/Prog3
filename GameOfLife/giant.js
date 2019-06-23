@@ -1,23 +1,36 @@
 var LivingCreature = require("./LivingCreature");
 var random = require("./random");
 
-module.exports = class Giant extends LivingCreature{
+module.exports = class Giant extends LivingCreature {
     constructor(x, y) {
-        super(x,y);
-        this.energy = 10;
+        super(x, y);
+        this.energy = 20;
         this.directions = [];
     }
     newDirections() {
-        this.directions = [
-            [this.x - 3, this.y - 3],
-            [this.x, this.y - 3],
-            [this.x + 3, this.y - 3],
-            [this.x - 3, this.y],
-            [this.x + 3, this.y],
-            [this.x - 3, this.y + 3],
-            [this.x, this.y + 3],
-            [this.x + 3, this.y + 3]
-        ];
+        if (weather == "Spring") {
+            this.directions = [
+                [this.x - 1, this.y - 1],
+                [this.x, this.y - 1],
+                [this.x + 1, this.y - 1],
+                [this.x - 1, this.y],
+                [this.x + 1, this.y],
+                [this.x - 1, this.y + 1],
+                [this.x, this.y + 1],
+                [this.x + 1, this.y + 1]
+            ];
+        } else {
+            this.directions = [
+                [this.x - 3, this.y - 3],
+                [this.x, this.y - 3],
+                [this.x + 3, this.y - 3],
+                [this.x - 3, this.y],
+                [this.x + 3, this.y],
+                [this.x - 3, this.y + 3],
+                [this.x, this.y + 3],
+                [this.x + 3, this.y + 3]
+            ];
+        }
     }
 
     move() {
@@ -101,7 +114,7 @@ module.exports = class Giant extends LivingCreature{
 
 
             //եթե պատրաստ է բազմացմանը, բազմանում է 
-            if (this.multiply == 10) {
+            if (this.multiply == 6) {
                 this.mul()
                 this.multiply = 0;
             }
