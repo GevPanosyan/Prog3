@@ -19,7 +19,6 @@ module.exports = class BlackHole extends LivingCreature {
             [this.x + 1, this.y + 1]
         ];
     }
-
     eat() {
         //հետազոտում է շրջակայքը, որոնում է սնունդ
         var fundCords1 = this.getDirections(3);

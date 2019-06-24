@@ -1,25 +1,38 @@
 var LivingCreature = require("./LivingCreature");
 var random = require("./random");
 
-module.exports = class Eatgrass extends LivingCreature{
+module.exports = class Eatgrass extends LivingCreature {
     constructor(x, y) {
-        super(x,y);
+        super(x, y);
         this.energy = 15;
         this.directions = [];
     }
 
     //շրջապատի հետազոտության մատրիցը
     newDirections() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
+        if (weatherType == "Ձմեռ") {
+            this.directions = [
+                [this.x - 2, this.y - 2],
+                [this.x, this.y - 2],
+                [this.x + 2, this.y - 2],
+                [this.x - 2, this.y],
+                [this.x + 2, this.y],
+                [this.x - 2, this.y + 2],
+                [this.x, this.y + 2],
+                [this.x + 2, this.y + 2]
+            ];
+        } else {
+            this.directions = [
+                [this.x - 2, this.y - 2],
+                [this.x, this.y - 2],
+                [this.x + 2, this.y - 2],
+                [this.x - 2, this.y],
+                [this.x + 2, this.y],
+                [this.x - 2, this.y + 2],
+                [this.x, this.y + 2],
+                [this.x + 2, this.y + 2]
+            ];
+        }
     }
 
     //move() շարժվել
@@ -67,7 +80,7 @@ module.exports = class Eatgrass extends LivingCreature{
             this.multiply++;
             grassEaterHashiv++;
             //մեծացնում է էներգիան
-            this.energy++;
+            this.energy+=2;
 
             //!!! ԿԱՐԵՎՈՐ !!! սննդի զանգվածից ջնջում է կերված սնունդը
             //խոտակերի համար դա խոտն է, խոտերի զանգվածի մեջ grassArr
@@ -78,9 +91,16 @@ module.exports = class Eatgrass extends LivingCreature{
             }
 
             //եթե պատրաստ է բազմացմանը, բազմանում է 
-            if (this.multiply == 4) {
-                this.mul()
-                this.multiply = 0;
+            if(weatherType=="Ձմեռ"){
+                if (this.multiply == 3) {
+                    this.mul()
+                    this.multiply = 0;
+                }
+            }else{
+                if (this.multiply == 5) {
+                    this.mul()
+                    this.multiply = 0;
+                }
             }
 
 
@@ -122,9 +142,9 @@ module.exports = class Eatgrass extends LivingCreature{
     //die() մահանալ
     die() {
         //Հիմնական մատրիցում իր դիրքում դնում է դատարկություն
-        if(weather == "Winter"){
+        if (weather == "Ձմեռ") {
             matrix[this.y][this.x] = 4;
-        }else{
+        } else {
             matrix[this.y][this.x] = 0;
         }
 

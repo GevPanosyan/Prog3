@@ -21,7 +21,8 @@ grassEaterHashiv = 0;
 predatorHashiv = 0;
 blackHoleHashiv = 0;
 giantHashiv = 0;
-weather = null;
+weather = 0;
+weatherType = "Ամառ";
 //! Setting global arrays  -- END
 
 
@@ -61,7 +62,7 @@ function matrixGenerator(matrixSize, grassArr, eatArr, preArr, holeArr, giantArr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 12, 50, 40, 7, 10);
+matrixGenerator(20, 12, 30, 40, 3, 5);
 //! Creating MATRIX -- END
 
 
@@ -109,6 +110,20 @@ function creatingObjects() {
 creatingObjects();
 
 function game() {
+    weather++;
+    if(weather<=0 && weather<=5){
+        weatherType = "Ամառ";
+    }else if(weather>=6 && weather<=10){
+        weatherType = "Աշուն";
+    }else if(weather>=11 && weather<=15){
+        weatherType = "Ձմեռ";
+    }else if(weather>=16 && weather<=20){
+        weatherType = "Գարուն";
+    }else if(weather>=21){
+        weather = 0;
+        weatherType = "Ամառ";
+    }
+
     if (grassArr[0] !== undefined) {
         for (var i in grassArr) {
             grassArr[i].mul();
@@ -135,35 +150,19 @@ function game() {
         }
     }
 
-    
-   i = 1;
-   i++;
-    if (i == 1) {
-        weather = "Summer";
+    //! Object to send
+    let sendData = {
+        matrix: matrix,
+        grassCounter: grassHashiv,
+        grassEaterCounter: grassEaterHashiv,
+        predatorCounter: predatorHashiv,
+        blackHoleCounter: blackHoleHashiv,
+        giantCounter: giantHashiv,
+        exanak: weatherType,
     }
-    else if (i == 2) {
-        weather = "Autumn";
-    }
-    else if (i == 3) {
-        weather = "Winter";
-    }
-    else if (i == 4) {
-        weather = "Spring";
-    }
-        //! Object to send
-        let sendData = {
-            matrix: matrix,
-            grassCounter: grassHashiv,
-            grassEaterCounter: grassEaterHashiv,
-            predatorCounter: predatorHashiv,
-            blackHoleCounter: blackHoleHashiv,
-            giantCounter: giantHashiv,
-            exanak: weather,
-        }
 
-        //! Send data over the socket to clients who listens "data"
-        io.sockets.emit("data", sendData);
-        console.log(weather);
-    
+    //! Send data over the socket to clients who listens "data"
+    io.sockets.emit("data", sendData);
+    console.log(weatherType);
 }
 setInterval(game, 1000);

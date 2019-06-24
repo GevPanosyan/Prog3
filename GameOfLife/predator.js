@@ -1,9 +1,9 @@
 var LivingCreature = require("./LivingCreature");
 var random = require("./random");
 
-module.exports = class Predator extends LivingCreature{
+module.exports = class Predator extends LivingCreature {
     constructor(x, y) {
-        super(x,y);
+        super(x, y);
         this.energy = 10;
         this.directions = [];
     }
@@ -47,8 +47,15 @@ module.exports = class Predator extends LivingCreature{
     //eat()-ուտել
     eat() {
         //հետազոտում է շրջակայքը, որոնում է սնունդ
-        var fundCords = this.getDirections(2);
-        var cord = random(fundCords);
+        if (weatherType == "Գարուն") {
+            var fundCords1 = this.getDirections(2);
+            var fundCords2 = this.getDirections(1);
+            var fundCords = fundCords1.concat(fundCords2);
+            var cord = random(fundCords)
+        } else {
+            var fundCords = this.getDirections(2);
+            var cord = random(fundCords);
+        }
 
         //եթե կա հարմար սնունդ
         if (cord) {
@@ -68,7 +75,11 @@ module.exports = class Predator extends LivingCreature{
             this.multiply++;
 
             //մեծացնում է էներգիան
-            this.energy++;
+            if (weatherType == "Աշուն") {
+                this.energy++;
+            } else {
+                this.energy += 2;
+            }
 
             //!!! ԿԱՐԵՎՈՐ !!! սննդի զանգվածից ջնջում է կերված սնունդը
             //խոտակերի համար դա խոտն է, խոտերի զանգվածի մեջ grassArr
@@ -79,7 +90,7 @@ module.exports = class Predator extends LivingCreature{
             }
 
             //եթե պատրաստ է բազմացմանը, բազմանում է 
-            if (this.multiply == 6) {
+            if (this.multiply == 5) {
                 this.mul()
                 this.multiply = 0;
             }

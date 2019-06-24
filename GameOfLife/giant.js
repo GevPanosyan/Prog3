@@ -8,7 +8,7 @@ module.exports = class Giant extends LivingCreature {
         this.directions = [];
     }
     newDirections() {
-        if (weather == "Spring") {
+        if (weatherType == "Գարուն") {
             this.directions = [
                 [this.x - 1, this.y - 1],
                 [this.x, this.y - 1],

@@ -19,16 +19,16 @@ function setup() {
     socket.on("data", drawCreatures);
 
     function drawCreatures(data) {
-        /*
-        if(data.exanak == "Spring"){
-            document.body.style.backgroundColor = "green";
-        }else if(data.exanak == "Summer"){
-            document.body.style.backgroundColor = "yellow";
-        }else if(data.exanak == "Winter"){
-            document.body.style.backgroundColor = "#ecf0f1";
-        }else if(data.exanak == "Autumn"){
-            document.body.style.backgroundColor = "red";
-        }*/
+        
+        if(data.exanak == "Գարուն"){
+            document.body.style.backgroundColor = "#82ed85";
+        }else if(data.exanak == "Ամառ"){
+            document.body.style.backgroundColor = "#ebff7a";
+        }else if(data.exanak == "Ձմեռ"){
+            document.body.style.backgroundColor = "#e5dcda";
+        }else if(data.exanak == "Աշուն"){
+            document.body.style.backgroundColor = "#ffb69e";
+        }
 
         weatherType.innerText = "Եղանակ: " + data.exanak;
         console.log(data.exanak)
@@ -49,10 +49,18 @@ function setup() {
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    fill("green");
+                    if(data.exanak=="Ձմեռ"){
+                        fill("#6ae554");
+                    }else{
+                        fill("green");
+                    }    
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 2) {
-                    fill("orange");
+                    if(data.exanak=="Ձմեռ"){
+                        fill("#edb900");
+                    }else{
+                        fill("yellow");
+                    }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 0) {
                     fill('#ccc');
@@ -64,7 +72,11 @@ function setup() {
                     fill('black');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 5) {
-                    fill('blue');
+                    if(data.exanak=="Ամառ" || data.exanak=="Գարուն"){
+                        fill("#0a007f");
+                    }else{
+                        fill("#3526e2");
+                    }
                     rect(j * side, i * side, side, side);
                 }
             }
